@@ -129,9 +129,9 @@ export function filterRoutesByKind(json: RoutesJson, kind: string): RoutesJson {
   if (!(ROUTE_KINDS as readonly string[]).includes(kind)) {
     throw new MoonsError({
       code: "E_INTERNAL",
-      message: `\`--kind=${kind}\` tidak dikenal`,
-      details: `Nilai valid: ${ROUTE_KINDS.join(", ")}.`,
-      suggestions: ["Contoh: `moons routes --json --kind=page`"],
+      message: `unknown \`--kind=${kind}\``,
+      details: `Valid values: ${ROUTE_KINDS.join(", ")}.`,
+      suggestions: ["Example: `moons routes --json --kind=page`"],
     });
   }
   const routes = json.routes.filter((route) => route.kind === kind);

@@ -14,9 +14,9 @@ export function resolveViteBin(cwd: string): string {
     if (parent === current) {
       throw new MoonsError({
         code: "E_INTERNAL",
-        message: "`vite` tidak ditemukan di node_modules",
-        details: "Project perlu dependency `vite` .",
-        suggestions: ["Jalankan `bun install` di root project"],
+        message: "`vite` not found in node_modules",
+        details: "The project needs the `vite` dependency.",
+        suggestions: ["Run `bun install` in the project root"],
       });
     }
     current = parent;

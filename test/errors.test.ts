@@ -13,7 +13,7 @@ test("moons errors --json: katalog lengkap + versi framework", () => {
   expect(codes).toEqual([...MOONS_ERROR_CODES].sort());
 
   const schemaRef = json.errors.find((entry) => entry.code === "E_SCHEMA_LOCAL_REF");
-  expect(schemaRef?.trigger).toContain("deklarasi lokal");
+  expect(schemaRef?.trigger).toContain("local declaration");
   expect(schemaRef?.suggestions.length ?? 0).toBeGreaterThan(0);
 });
 

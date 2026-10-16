@@ -12,5 +12,5 @@ export async function runTypegen(cwd: string): Promise<void> {
     outDir: resolve(cwd, ".moons"),
   });
 
-  console.log("[moons] typegen selesai: .moons/routes.d.ts + .moons/context.d.ts");
+  console.log("[moons] typegen complete: .moons/routes.d.ts + .moons/context.d.ts");
 }

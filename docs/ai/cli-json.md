@@ -49,7 +49,7 @@ Scans every `*.server.{ts,tsx}` (excluding `node_modules`, `dist`, `.moons`,
     }
   ],
   "registry": { "src/server/users.server.ts#getUser": "0b86453c274ba6fc" },
-  // Setiap file *.server.{ts,tsx} hasil scan (termasuk yang tanpa serverFn):
+  // Every scanned *.server.{ts,tsx} file (including ones without a serverFn):
   "serverFiles": ["src/server/secrets.server.ts", "src/server/users.server.ts"]
 }
 ```
@@ -85,8 +85,8 @@ Runs, in order: `typegen` → `tsc --noEmit` (TypeScript from the app's
 
 ## `moons errors --json`
 
-Katalog error machine-readable — sumber terstruktur
-`ERROR_CATALOG` di `@moonsjs/core`; wajib memuat semua `MOONS_ERROR_CODES`.
+Machine-readable error catalog — the structured source is
+`ERROR_CATALOG` in `@moonsjs/core`; it must contain every `MOONS_ERROR_CODES`.
 
 ```jsonc
 {
@@ -95,9 +95,9 @@ Katalog error machine-readable — sumber terstruktur
   "errors": [
     {
       "code": "E_SCHEMA_LOCAL_REF",
-      "trigger": "Schema input/output serverFn merujuk deklarasi lokal …",
-      "details": "Stub client hanya membawa import + ekspresi schema …",
-      "suggestions": ["Inline schema …", "Impor schema dari modul lain …"]
+      "trigger": "A serverFn `input`/`output` schema references a local declaration …",
+      "details": "The client stub only carries imports + schema expressions …",
+      "suggestions": ["Inline the schema …", "Import the schema from a client-safe shared module …"]
     }
   ]
 }

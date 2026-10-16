@@ -82,7 +82,7 @@ export async function executeCheck(
     }
     steps.push(step);
     if (!quiet) {
-      console.error(`[moons] check: ${name} ... GAGAL (${durationMs}ms)`);
+      console.error(`[moons] check: ${name} ... FAILED (${durationMs}ms)`);
       if (result.output !== undefined && result.output.trim().length > 0) {
         console.error(result.output.trimEnd());
       }
@@ -109,8 +109,8 @@ export async function executeCheck(
     const tsBin = resolveTsBin(cwd);
     if (tsBin === null) {
       return {
-        message: "`typescript` tidak ditemukan di node_modules",
-        output: "Saran: `bun add -d typescript` di root project.",
+        message: "`typescript` not found in node_modules",
+        output: "Suggestion: `bun add -d typescript` in the project root.",
       };
     }
     const runtime = typeof Bun !== "undefined" ? process.execPath : "bun";
@@ -184,9 +184,9 @@ export async function runCheck(cwd: string, args: ReadonlyArray<string>): Promis
   if (asJson) {
     console.log(JSON.stringify(result, null, 2));
   } else if (result.ok) {
-    console.log("[moons] check OK — typegen + tsc + build client/server + prerender hijau");
+    console.log("[moons] check OK — typegen + tsc + build client/server + prerender passed");
   } else {
-    console.error("[moons] check GAGAL — perbaiki langkah yang merah lalu ulangi");
+    console.error("[moons] check FAILED — fix the failing step(s), then re-run");
   }
   return result.ok ? 0 : 1;
 }

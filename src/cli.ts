@@ -15,16 +15,16 @@ import { runTypegen } from "./commands/typegen";
 const USAGE = [
   "moons <command>",
   "",
-  "  moons create <name>   scaffold project baru",
+  "  moons create <name>   scaffold a new project",
   "  moons dev             dev server (HMR)",
   "  moons build           production build (dist/client + dist/server)",
   "  moons start           serve dist/",
   "  moons typegen         regenerate .moons/*.d.ts",
-  "  moons routes [--json] tabel route dari scan (tanpa build)",
-  "  moons fns [--json]    registry serverFn dari scan .server.ts",
+  "  moons routes [--json] route table from scan (no build)",
+  "  moons fns [--json]    serverFn registry from .server.ts scan",
   "  moons check [--json]  typegen -> tsc --noEmit -> build client+server",
-  "  moons errors [--json] katalog error machine-readable",
-  "  moons audit [--json]  audit keamanan (RPC, env, cookie, CSP, dist/client)",
+  "  moons errors [--json] machine-readable error catalog",
+  "  moons audit [--json]  security audit (RPC, env, cookie, CSP, dist/client)",
 ];
 
 /** Entry CLI (dipisah dari `process` agar bisa ditest). */
@@ -42,7 +42,7 @@ export async function runCli(argv: ReadonlyArray<string>, cwd = process.cwd()): 
 
   const parsed = parseCommand(argv);
   if (parsed === null) {
-    console.error(`[moons] perintah \`${first}\` tidak dikenal`);
+    console.error(`[moons] unknown command \`${first}\``);
     console.error(USAGE.join("\n"));
     return 1;
   }

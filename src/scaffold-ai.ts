@@ -17,14 +17,14 @@ function routeRows(targetDir: string): string[] {
   try {
     const routes = scanRoutes(resolve(targetDir, "src", "routes"));
     if (routes.length === 0) {
-      return ["_belum ada route — jalankan `moons routes --json` untuk peta terbaru._"];
+      return ["_no routes yet — run `moons routes --json` for the latest map._"];
     }
     return routes.map(
       (route) =>
         `| \`${route.path}\` | \`${toPosix(relative(targetDir, route.file))}\` | ${route.kind} |`,
     );
   } catch {
-    return ["_jalankan `moons routes --json` untuk peta route terbaru._"];
+    return ["_run `moons routes --json` for the latest route map._"];
   }
 }
 

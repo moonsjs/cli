@@ -89,8 +89,8 @@ test("scaffoldProject: direktori tujuan non-kosong → MoonsError", () => {
   }
 
   expect(thrown).toBeInstanceOf(MoonsError);
-  expect((thrown as MoonsError).format()).toContain("tidak kosong");
-  expect((thrown as MoonsError).format()).toContain("Saran:");
+  expect((thrown as MoonsError).format()).toContain("not empty");
+  expect((thrown as MoonsError).format()).toContain("Suggestion:");
 });
 
 test("scaffoldProject: template di dalam path ber-`node_modules` (layout bunx) tetap ter-copy", () => {

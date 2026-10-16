@@ -28,23 +28,23 @@ export async function runBuild(cwd: string): Promise<void> {
   if (prerenderCode !== 0) {
     throw new MoonsError({
       code: "E_INTERNAL",
-      message: `prerender gagal (exit ${prerenderCode})`,
-      details: "Runner `dist/server/prerender.js` mengembalikan exit code non-zero; lihat output di atas.",
+      message: `prerender failed (exit ${prerenderCode})`,
+      details: "The `dist/server/prerender.js` runner returned a non-zero exit code; see the output above.",
       suggestions: [
-        "Perbaiki error [moons] E_PRERENDER_* yang tampil",
-        "Atau hapus `prerender`/`paths` dari route terkait",
+        "Fix the [moons] E_PRERENDER_* error shown above",
+        "Or remove `prerender`/`paths` from the affected route",
       ],
     });
   }
 
-  console.log("[moons] build selesai: dist/client + dist/server/index.js");
+  console.log("[moons] build complete: dist/client + dist/server/index.js");
 }
 
 function buildFailed(target: string, code: number): MoonsError {
   return new MoonsError({
     code: "E_INTERNAL",
-    message: `build ${target} gagal (exit ${code})`,
-    details: "`vite build` mengembalikan exit code non-zero; lihat output di atas.",
-    suggestions: ["Perbaiki error build yang tampil", "Jalankan `moons build` ulang"],
+    message: `build ${target} failed (exit ${code})`,
+    details: "`vite build` returned a non-zero exit code; see the output above.",
+    suggestions: ["Fix the build error shown above", "Re-run `moons build`"],
   });
 }

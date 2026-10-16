@@ -25,11 +25,11 @@ const server = createTestServer({
   },
 });
 
-test("/ merender SSR dengan data loader", async () => {
+test("/ renders SSR with loader data", async () => {
   const response = await server.fetch("/");
   expect(response.status).toBe(200);
   const body = await response.text();
-  expect(body).toContain("Halo dari SSR");
+  expect(body).toContain("Hello from SSR");
   expect(body).toContain("2024-01-01");
 });
 

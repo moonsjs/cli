@@ -15,9 +15,9 @@ export async function loadProjectConfig(cwd: string): Promise<ProjectConfig> {
     throw new MoonsError({
       code: "E_CONFIG_INVALID",
       file: configPath,
-      message: "`moons.config.ts` tidak ditemukan",
-      details: "Perintah ini membutuhkan config di root project.",
-      suggestions: ["Buat `moons.config.ts` dengan `export default defineConfig({ ... })`"],
+      message: "`moons.config.ts` not found",
+      details: "This command requires a config file at the project root.",
+      suggestions: ["Create `moons.config.ts` with `export default defineConfig({ ... })`"],
     });
   }
 

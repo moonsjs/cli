@@ -31,9 +31,9 @@ export function scaffoldProject(options: ScaffoldOptions): ScaffoldResult {
     throw new MoonsError({
       code: "E_INTERNAL",
       file: target,
-      message: "direktori tujuan sudah ada dan tidak kosong",
-      details: "`moons create` hanya boleh menulis ke direktori baru atau kosong.",
-      suggestions: ["Pilih nama lain", "Hapus atau pindahkan isi direktori tujuan"],
+      message: "target directory already exists and is not empty",
+      details: "`moons create` can only write to a new or empty directory.",
+      suggestions: ["Pick another name", "Remove or move the contents of the target directory"],
     });
   }
 
@@ -110,9 +110,9 @@ export async function runCreate(cwd: string, name: string | undefined): Promise<
   if (name === undefined || name.trim().length === 0) {
     throw new MoonsError({
       code: "E_INTERNAL",
-      message: "`moons create` membutuhkan nama project",
-      details: "Perintah: `moons create <name>`.",
-      suggestions: ["Contoh: `moons create demo`"],
+      message: "`moons create` requires a project name",
+      details: "Usage: `moons create <name>`.",
+      suggestions: ["Example: `moons create demo`"],
     });
   }
 
@@ -124,10 +124,10 @@ export async function runCreate(cwd: string, name: string | undefined): Promise<
     name,
     dependencyMode: workspaceRoot === null ? "published" : "workspace",
   });
-  console.log(`[moons] project \`${result.packageName}\` dibuat di ${targetDir}`);
+  console.log(`[moons] project \`${result.packageName}\` created in ${targetDir}`);
 
   if (workspaceRoot === null) {
-    console.log("[moons] menjalankan `bun install` ...");
+    console.log("[moons] running `bun install` ...");
     const proc = Bun.spawn(["bun", "install"], {
       cwd: targetDir,
       env: process.env,
@@ -137,27 +137,27 @@ export async function runCreate(cwd: string, name: string | undefined): Promise<
     if (code !== 0) {
       throw new MoonsError({
         code: "E_INTERNAL",
-        message: "`bun install` gagal di project baru",
+        message: "`bun install` failed in the new project",
         details: `Exit code ${code}.`,
         suggestions: [
-          "Jalankan `bun install` manual di direktori project",
-          "Periksa koneksi ke registry npm",
+          "Run `bun install` manually in the project directory",
+          "Check the connection to the npm registry",
         ],
       });
     }
   } else {
     console.log(
-      `[moons] workspace terdeteksi (${workspaceRoot}) — \`bun install\` dilewati; dependensi tersedia dari workspace.`,
+      `[moons] workspace detected (${workspaceRoot}) — skipping \`bun install\`; dependencies are provided by the workspace.`,
     );
   }
 
   console.log("");
-  console.log("Selesai! Langkah berikutnya:");
+  console.log("Done! Next steps:");
   console.log(`  cd ${name}`);
   console.log("  moons dev        # dev server (port 3000)");
-  console.log("  moons check      # verifikasi: typegen -> tsc -> build");
-  console.log("  moons build      # build produksi (dist/client + dist/server)");
-  console.log("  moons start      # jalankan hasil build");
+  console.log("  moons check      # verify: typegen -> tsc -> build");
+  console.log("  moons build      # production build (dist/client + dist/server)");
+  console.log("  moons start      # serve the build output");
   console.log("");
-  console.log("AGENTS.md + llms.txt ditulis ke project (konteks untuk agen AI).");
+  console.log("AGENTS.md + llms.txt written to the project (context for AI agents).");
 }

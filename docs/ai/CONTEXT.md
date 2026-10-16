@@ -260,12 +260,12 @@ import { Link, refresh, useLoaderData, useParams, useSearchParams } from "@moons
   ```
   [moons] E_ROUTE_EXPORT_INVALID
   src/routes/about.tsx:3
-  `src/routes/` hanya boleh export default|loader|meta
-  Saran:
-  - Hapus export tambahan
+  `src/routes/` only allows exports default|loader|meta
+  Suggestion:
+  - Remove the extra export
   ```
 
-  Treat the code as the machine identifier; read `Saran:` (suggestions) for the
+  Treat the code as the machine identifier; read `Suggestion:` (suggestions) for the
   intended fix.
 
 ## 8. Hard security rules (do not violate)

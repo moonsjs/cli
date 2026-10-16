@@ -85,8 +85,8 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
   push(
     "rpc-inventory",
     "pass",
-    `${fns.count} serverFn terdaftar`,
-    fns.count === 0 ? "tidak ada endpoint RPC" : fns.fns.map((fn) => fn.key).join(", "),
+    `${fns.count} serverFn registered`,
+    fns.count === 0 ? "no RPC endpoints" : fns.fns.map((fn) => fn.key).join(", "),
   );
 
   // 2) Peta akses env() — nilai rahasia hanya boleh dibaca di file server.
@@ -106,11 +106,11 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
   push(
     "env-access",
     "pass",
-    `${envKeys.size} kunci env() terdeteksi di file server`,
+    `${envKeys.size} env() keys detected in server files`,
     envKeys.size === 0
-      ? "tidak ada akses env() literal"
+      ? "no literal env() access"
       : [...envKeys].sort().join(", ") +
-        (dynamicEnvFiles.length > 0 ? ` · dinamis: ${dynamicEnvFiles.join(", ")}` : ""),
+        (dynamicEnvFiles.length > 0 ? ` · dynamic: ${dynamicEnvFiles.join(", ")}` : ""),
   );
 
   // 3) Flag cookie pada setCookie() di source.
@@ -131,7 +131,7 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
         /sameSite|SameSite/.test(window) ? null : "SameSite",
       ].filter((item): item is string => item !== null);
       if (missing.length > 0) {
-        insecureCookies.push(`${relative(cwd, file)}:${index + 1} (tanpa ${missing.join(", ")})`);
+        insecureCookies.push(`${relative(cwd, file)}:${index + 1} (without ${missing.join(", ")})`);
       }
     });
   }
@@ -139,8 +139,8 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
     "cookie-flags",
     insecureCookies.length === 0 ? "pass" : "warn",
     cookieCalls === 0
-      ? "tidak ada cookie diset"
-      : `${cookieCalls} setCookie() · ${insecureCookies.length} tanpa flag lengkap`,
+      ? "no cookies set"
+      : `${cookieCalls} setCookie() · ${insecureCookies.length} missing full flags`,
     insecureCookies.slice(0, 8).join(" · "),
   );
 
@@ -152,13 +152,13 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
     push(
       "headers-csp",
       "warn",
-      "tidak ada Content-Security-Policy di `headers`",
-      "Tambahkan `headers: { \"content-security-policy\": \"default-src 'self'; script-src 'self' 'unsafe-inline'\" }` atau CSP ketat lain",
+      "no Content-Security-Policy in `headers`",
+      "Add `headers: { \"content-security-policy\": \"default-src 'self'; script-src 'self' 'unsafe-inline'\" }` or another strict CSP",
     );
   } else if (/unsafe-inline|unsafe-eval/.test(csp[1])) {
-    push("headers-csp", "warn", "CSP memuat `unsafe-inline`/`unsafe-eval`", csp[1]);
+    push("headers-csp", "warn", "CSP contains `unsafe-inline`/`unsafe-eval`", csp[1]);
   } else {
-    push("headers-csp", "pass", "CSP terpasang tanpa unsafe-inline/unsafe-eval", csp[1]);
+    push("headers-csp", "pass", "CSP set without unsafe-inline/unsafe-eval", csp[1]);
   }
 
   // 5) Deploy kit (info).
@@ -166,10 +166,10 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
   const deployParts = [
     `${headers.length} header`,
     `${redirects} redirect`,
-    config.sitemap === undefined ? "tanpa sitemap" : "sitemap ✓",
-    config.robots === undefined ? "tanpa robots" : "robots ✓",
+    config.sitemap === undefined ? "no sitemap" : "sitemap ✓",
+    config.robots === undefined ? "no robots" : "robots ✓",
   ];
-  push("deploy-kit", "pass", "deploy kit statis", deployParts.join(" · "));
+  push("deploy-kit", "pass", "static deploy kit", deployParts.join(" · "));
 
   // 6) Pemindaian dist/client untuk nilai env mirip-rahasia + canary.
   const clientDir = join(cwd, "dist", "client");
@@ -191,7 +191,7 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
       scanned += 1;
       for (const secret of secrets) {
         if (text.includes(secret.value)) {
-          leaks.push(`${relative(cwd, file)} memuat ${secret.label}`);
+          leaks.push(`${relative(cwd, file)} contains ${secret.label}`);
         }
       }
     }
@@ -199,12 +199,12 @@ export async function executeAudit(cwd: string, options: AuditOptions = {}): Pro
       "dist-scan",
       leaks.length === 0 ? "pass" : "fail",
       leaks.length === 0
-        ? `${scanned} file dist/client dipindai (${secrets.length} nilai sensitif)`
-        : `${leaks.length} kebocoran di dist/client`,
+        ? `${scanned} dist/client files scanned (${secrets.length} sensitive values)`
+        : `${leaks.length} leaks in dist/client`,
       leaks.slice(0, 8).join(" · "),
     );
   } else {
-    push("dist-scan", "warn", "dist/client belum ada — jalankan `moons build` dulu", clientDir);
+    push("dist-scan", "warn", "dist/client not found yet — run `moons build` first", clientDir);
   }
 
   const counts = { pass: 0, warn: 0, fail: 0 };
@@ -238,7 +238,7 @@ export async function runAudit(cwd: string, args: ReadonlyArray<string>): Promis
         console.log(`      ${check.detail}`);
       }
     }
-    console.log(`ringkasan: ${result.counts.pass} pass · ${result.counts.warn} warn · ${result.counts.fail} fail`);
+    console.log(`summary: ${result.counts.pass} pass · ${result.counts.warn} warn · ${result.counts.fail} fail`);
   }
   return result.ok ? 0 : 1;
 }

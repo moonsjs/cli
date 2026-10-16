@@ -11,7 +11,7 @@ export default function UserPage() {
   return (
     <section>
       <h1 id="user-title">User {params.id}</h1>
-      <p id="user-name">nama: {data.name}</p>
+      <p id="user-name">name: {data.name}</p>
     </section>
   );
 }

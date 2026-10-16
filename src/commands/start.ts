@@ -25,9 +25,9 @@ export async function runStart(cwd: string): Promise<void> {
     throw new MoonsError({
       code: "E_INTERNAL",
       file: entry,
-      message: "`dist/server/index.js` tidak ditemukan",
-      details: "Hasil build belum ada.",
-      suggestions: ["Jalankan `moons build` lebih dulu"],
+      message: "`dist/server/index.js` not found",
+      details: "No build output yet.",
+      suggestions: ["Run `moons build` first"],
     });
   }
 
