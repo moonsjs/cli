@@ -17,7 +17,7 @@ The cookbook now ships the real pattern — copy-in components, Tailwind, `cva`,
 Setup for a new app:
 
 1. `bun add -d tailwindcss @tailwindcss/vite` and wire Tailwind
-   ([Tailwind recipe](./tailwind.md)).
+   ([Tailwind recipe](tailwind.md)).
 2. `bun add clsx tailwind-merge class-variance-authority @radix-ui/react-dialog @radix-ui/react-dropdown-menu`
    (add more `@radix-ui/*` packages as you copy more components).
 3. Copy `cn.ts` and the components you need under `src/components/ui/`

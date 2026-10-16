@@ -10,34 +10,35 @@
 - Site: https://docs.devmoon.net
 - Raw markdown for agents: https://docs.devmoon.net/raw/ai/CONTEXT.md
 - Bundles: https://docs.devmoon.net/llms.txt · https://docs.devmoon.net/llms-full.txt
+- Bahasa Indonesia: https://docs.devmoon.net/id/
 
 ## Start here
 
-- [Quickstart](site/mulai/mulai-cepat.md): create → dev → build → deploy.
-- [Project structure](site/mulai/struktur-proyek.md)
-- [Security model](site/keamanan.md): the zero-trust guarantee.
+- [Quickstart](site/start/quickstart.md): create → dev → build → deploy.
+- [Project structure](site/start/project-structure.md)
+- [Zero-trust model](site/concepts/zero-trust.md): the guarantee and how it is enforced.
 
 ## Core concepts
 
-- [Routing](site/dasar/routing.md) · [Loaders](site/dasar/loader.md) ·
-  [serverFn](site/dasar/server-fn.md) ·
-  [Context & env](site/dasar/context-env.md) ·
-  [Navigation & search params](site/dasar/navigasi.md) ·
-  [Meta & SEO](site/dasar/meta.md) ·
-  [Errors, redirect & 404](site/dasar/error.md)
+- [Routing](site/concepts/routing.md) · [Loaders](site/concepts/loaders.md) ·
+  [serverFn](site/concepts/server-fn.md) ·
+  [Context & env](site/concepts/context-env.md) ·
+  [Navigation & URL params](site/concepts/navigation.md) ·
+  [Meta & SEO](site/concepts/meta.md) ·
+  [Errors, redirect & 404](site/concepts/errors.md)
 
 ## Guides
 
-- [Two-sided validation](site/panduan/validasi-dua-sisi.md) ·
-  [Auth & CSRF](site/panduan/auth-dan-csrf.md) ·
-  [Rate limit](site/panduan/rate-limit.md) ·
-  [Raw API endpoints](site/panduan/api-routes.md) ·
-  [Static prerender & ISR](site/panduan/prerender.md) ·
-  [File uploads](site/panduan/upload.md) ·
-  [Cache & HTTP headers](site/panduan/cache-dan-http.md) ·
-  [Testing](site/panduan/testing.md) ·
-  [Plugins & lifecycle](site/panduan/plugin.md) ·
-  [Build & deploy](site/panduan/deploy.md)
+- [Two-sided validation](site/guides/two-sided-validation.md) ·
+  [Auth & CSRF](site/guides/auth-csrf.md) ·
+  [Rate limiting](site/guides/rate-limit.md) ·
+  [API routes](site/guides/api-routes.md) ·
+  [Prerendering & ISR](site/guides/prerender-isr.md) ·
+  [File uploads](site/guides/uploads.md) ·
+  [Caching & HTTP headers](site/guides/caching-headers.md) ·
+  [Testing](site/guides/testing.md) ·
+  [Plugins & lifecycle](site/guides/plugins.md) ·
+  [Build & deploy](site/guides/deploy.md)
 
 ## For AI agents
 
@@ -54,7 +55,8 @@
 - [API reference](api/README.md): per-package docs (core, server, react, vite, cli, mcp).
 - [Architecture](manifest.md): why the server/client boundary is dangerous and how Moons enforces it.
 
-## Public mirrors
+## Repositories
 
-Packages are published as read-only mirrors under
-[`moonsjs`](https://github.com/moonsjs) (Issues welcome there).
+Packages are developed in the open under [`moonsjs`](https://github.com/moonsjs):
+`core` · `server` · `react` · `vite` · `cli` · `mcp`, plus `docs` and `cookbook`.
+Issues and pull requests are welcome in each repository.
