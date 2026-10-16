@@ -1,0 +1,17 @@
+export { runCli } from "./cli";
+export { CLI_COMMANDS, parseCommand } from "./args";
+export type { CliCommand, ParsedCommand } from "./args";
+export { detectWorkspaceRoot, matchesWorkspacePattern, repoRoot, templateDir } from "./util";
+export { scaffoldProject } from "./commands/create";
+export type { ScaffoldOptions, ScaffoldResult } from "./commands/create";
+export { resolveViteBin } from "./vite-runner";
+export { collectRoutes, filterRoutesByKind, formatRoutes } from "./commands/routes";
+export type { RouteJsonEntry, RoutesJson } from "./commands/routes";
+export { collectFns, formatFns } from "./commands/fns";
+export type { FnJsonEntry, FnsJson } from "./commands/fns";
+export { executeCheck, resolveTsBin } from "./commands/check";
+export type { CheckJson, CheckStep } from "./commands/check";
+export { catalogJson, runErrors } from "./commands/errors";
+export type { ErrorsJson } from "./commands/errors";
+export { renderAgentsMd, renderScaffoldLlmsTxt } from "./scaffold-ai";
+export type { ScaffoldAiOptions } from "./scaffold-ai";
