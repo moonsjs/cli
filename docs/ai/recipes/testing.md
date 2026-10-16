@@ -31,9 +31,8 @@ const res = await server.fetch("/search?q=alp"); // → Response
   route modules; layouts used by a page must be present too.
 - Client stubs validate too (same schema, before fetch). To unit-test that path,
   build the stub directly — `__moons_createStub` from `@moonsjs/server/client` —
-  and stub `globalThis.fetch`; see `packages/server/test/standard-schema.test.ts`
-  in the framework repo for a worked example (including disabling the SSR
-  in-process hook so the HTTP path is exercised).
-- For end-to-end proof (build + real server + leak canary), see
-  `scripts/cookbook/test-cookbook.sh` in the framework repo — apps can copy the
-  pattern for their own CI.
+  and stub `globalThis.fetch` (disable the SSR in-process hook so the HTTP path
+  is exercised).
+- For end-to-end proof (build + real server + leak canary), the
+  [cookbook](https://github.com/moonsjs/cookbook) runs the same pattern in CI —
+  copy it for your own pipeline.

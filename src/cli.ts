@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 import { MoonsError } from "@moonsjs/core";
 import { parseCommand } from "./args";
+import { runAudit } from "./commands/audit";
 import { runBuild } from "./commands/build";
 import { runCheck } from "./commands/check";
 import { runCreate } from "./commands/create";
@@ -23,6 +24,7 @@ const USAGE = [
   "  moons fns [--json]    registry serverFn dari scan .server.ts",
   "  moons check [--json]  typegen -> tsc --noEmit -> build client+server",
   "  moons errors [--json] katalog error machine-readable",
+  "  moons audit [--json]  audit keamanan (RPC, env, cookie, CSP, dist/client)",
 ];
 
 /** Entry CLI (dipisah dari `process` agar bisa ditest). */
@@ -73,6 +75,8 @@ export async function runCli(argv: ReadonlyArray<string>, cwd = process.cwd()): 
         break;
       case "check":
         return await runCheck(cwd, parsed.args);
+      case "audit":
+        return await runAudit(cwd, parsed.args);
     }
     return 0;
   } catch (error) {

@@ -6,8 +6,7 @@ shapes are part of the public contract:
 - Fields may be **added** in a minor release; existing fields never change
   meaning, are never renamed, and are never removed.
 - In `--json` mode the command writes **one JSON document to stdout** and
-  nothing else. stderr stays silent too (enforced by
-  `scripts/ai/test-cli-introspection.sh`).
+  nothing else. stderr stays silent too — the framework CI enforces this.
 
 ## `moons routes --json`
 
@@ -103,6 +102,12 @@ Katalog error machine-readable — sumber terstruktur
   ]
 }
 ```
+
+## `moons audit --json`
+
+Shape: `{ ok, counts: { pass, warn, fail }, checks: [{ id, level, title, detail? }] }`.
+
+Check ids: `rpc-inventory`, `env-access`, `cookie-flags`, `headers-csp`, `deploy-kit`, `dist-scan`. Exit code `1` when any check fails (`--strict` also fails on warnings); stdout stays valid JSON and stderr stays silent.
 
 ## Agent loop
 
