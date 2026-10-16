@@ -1,8 +1,8 @@
 # Recipe: auth via ctx (cookies) & CSRF limits
 
-Source of truth: [`moons.config.ts`](../../../examples/cookbook/moons.config.ts),
-[`src/routes/session.tsx`](../../../examples/cookbook/src/routes/session.tsx), and
-[`src/server/info.server.ts`](../../../examples/cookbook/src/server/info.server.ts).
+Source of truth: [`moons.config.ts`](https://github.com/moonsjs/cookbook/blob/main/moons.config.ts),
+[`src/routes/session.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/session.tsx), and
+[`src/server/info.server.ts`](https://github.com/moonsjs/cookbook/blob/main/src/server/info.server.ts).
 
 Auth is **not built in** (non-goal). The pattern is: parse the session cookie
 in `context(req)` → typed `ctx` → guard in loaders and serverFns.

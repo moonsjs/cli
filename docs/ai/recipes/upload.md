@@ -1,6 +1,6 @@
 # Recipe: file uploads (multipart)
 
-Source of truth: [`src/api/upload.ts`](../../../examples/cookbook/src/api/upload.ts)
+Source of truth: [`src/api/upload.ts`](https://github.com/moonsjs/cookbook/blob/main/src/api/upload.ts)
 (exercised end-to-end by the cookbook CI script: small file → size, 70KB → 413,
 missing field → 400, GET → 405).
 

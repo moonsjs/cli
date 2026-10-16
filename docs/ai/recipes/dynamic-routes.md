@@ -1,6 +1,6 @@
 # Recipe: dynamic routes
 
-Source of truth: [`examples/cookbook/src/routes/notes/[id].tsx`](../../../examples/cookbook/src/routes/notes/[id].tsx)
+Source of truth: [`examples/cookbook/src/routes/notes/[id].tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/notes/[id].tsx)
 
 `[id]` folders/files become dynamic segments (`:id`). `[...rest]` is a
 catch-all and must be the last segment.

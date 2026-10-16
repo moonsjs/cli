@@ -1,8 +1,8 @@
 # Recipe: Tailwind CSS v4
 
-Source of truth: [`vite.config.ts`](../../../examples/cookbook/vite.config.ts),
-[`src/styles.css`](../../../examples/cookbook/src/styles.css), and
-[`src/client/main.tsx`](../../../examples/cookbook/src/client/main.tsx).
+Source of truth: [`vite.config.ts`](https://github.com/moonsjs/cookbook/blob/main/vite.config.ts),
+[`src/styles.css`](https://github.com/moonsjs/cookbook/blob/main/src/styles.css), and
+[`src/client/main.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/client/main.tsx).
 
 Steps (cookbook is the tested reference):
 

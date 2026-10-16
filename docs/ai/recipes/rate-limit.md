@@ -1,7 +1,7 @@
 # Recipe: rate limiting (global middleware)
 
-Source of truth: [`src/shared/rate-limit.ts`](../../../examples/cookbook/src/shared/rate-limit.ts)
-and [`moons.config.ts`](../../../examples/cookbook/moons.config.ts).
+Source of truth: [`src/shared/rate-limit.ts`](https://github.com/moonsjs/cookbook/blob/main/src/shared/rate-limit.ts)
+and [`moons.config.ts`](https://github.com/moonsjs/cookbook/blob/main/moons.config.ts).
 
 Rate limiting is **not a core feature** — no `security.rateLimit`. Implement it
 as global middleware; it wraps HTML and RPC alike.

@@ -13,37 +13,37 @@
 
 ## Start here
 
-- [Quickstart](docs/site/mulai/mulai-cepat.md): create → dev → build → deploy.
-- [Project structure](docs/site/mulai/struktur-proyek.md)
-- [Security model](docs/site/keamanan.md): the zero-trust guarantee.
+- [Quickstart](site/mulai/mulai-cepat.md): create → dev → build → deploy.
+- [Project structure](site/mulai/struktur-proyek.md)
+- [Security model](site/keamanan.md): the zero-trust guarantee.
 
 ## Core concepts
 
-- [Routing](docs/site/dasar/routing.md) · [Loaders](docs/site/dasar/loader.md) ·
-  [serverFn](docs/site/dasar/server-fn.md) ·
-  [Context & env](docs/site/dasar/context-env.md) ·
-  [Navigation & search params](docs/site/dasar/navigasi.md) ·
-  [Meta & SEO](docs/site/dasar/meta.md) ·
-  [Errors, redirect & 404](docs/site/dasar/error.md)
+- [Routing](site/dasar/routing.md) · [Loaders](site/dasar/loader.md) ·
+  [serverFn](site/dasar/server-fn.md) ·
+  [Context & env](site/dasar/context-env.md) ·
+  [Navigation & search params](site/dasar/navigasi.md) ·
+  [Meta & SEO](site/dasar/meta.md) ·
+  [Errors, redirect & 404](site/dasar/error.md)
 
 ## Guides
 
-- [Two-sided validation](docs/site/panduan/validasi-dua-sisi.md) ·
-  [Auth & CSRF](docs/site/panduan/auth-dan-csrf.md) ·
-  [Rate limit](docs/site/panduan/rate-limit.md) ·
-  [Raw API endpoints](docs/site/panduan/api-routes.md) ·
-  [Static prerender & ISR](docs/site/panduan/prerender.md) ·
-  [File uploads](docs/site/panduan/upload.md) ·
-  [Cache & HTTP headers](docs/site/panduan/cache-dan-http.md) ·
-  [Testing](docs/site/panduan/testing.md) ·
-  [Plugins & lifecycle](docs/site/panduan/plugin.md) ·
-  [Build & deploy](docs/site/panduan/deploy.md)
+- [Two-sided validation](site/panduan/validasi-dua-sisi.md) ·
+  [Auth & CSRF](site/panduan/auth-dan-csrf.md) ·
+  [Rate limit](site/panduan/rate-limit.md) ·
+  [Raw API endpoints](site/panduan/api-routes.md) ·
+  [Static prerender & ISR](site/panduan/prerender.md) ·
+  [File uploads](site/panduan/upload.md) ·
+  [Cache & HTTP headers](site/panduan/cache-dan-http.md) ·
+  [Testing](site/panduan/testing.md) ·
+  [Plugins & lifecycle](site/panduan/plugin.md) ·
+  [Build & deploy](site/panduan/deploy.md)
 
 ## For AI agents
 
-- [AI context pack](docs/ai/CONTEXT.md): compact guide — routing, loaders, serverFn, ctx/env, navigation, security rules, verified patterns.
-- [CLI JSON contract](docs/ai/cli-json.md): stable `moons routes|fns|check --json` schemas for machine consumption.
-- [Recipes](docs/ai/recipes/search-params.md): query params, mutations + `refresh()`, two-sided validation, dynamic routes, custom 404/error, secrets/env, testing.
+- [AI context pack](ai/CONTEXT.md): compact guide — routing, loaders, serverFn, ctx/env, navigation, security rules, verified patterns.
+- [CLI JSON contract](ai/cli-json.md): stable `moons routes|fns|check --json` schemas for machine consumption.
+- [Recipes](ai/recipes/search-params.md): query params, mutations + `refresh()`, two-sided validation, dynamic routes, custom 404/error, secrets/env, testing.
 
 ## Examples
 
@@ -51,8 +51,8 @@
 
 ## Reference
 
-- [API reference](docs/api/README.md): per-package docs (core, server, react, vite, cli, mcp).
-- [Architecture](docs/manifest.md): why the server/client boundary is dangerous and how Moons enforces it.
+- [API reference](api/README.md): per-package docs (core, server, react, vite, cli, mcp).
+- [Architecture](manifest.md): why the server/client boundary is dangerous and how Moons enforces it.
 
 ## Public mirrors
 

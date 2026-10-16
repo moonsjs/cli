@@ -1,7 +1,7 @@
 # Recipe: custom 404 and error pages
 
-Source of truth: [`_404.tsx`](../../../examples/cookbook/src/routes/_404.tsx) and
-[`_error.tsx`](../../../examples/cookbook/src/routes/_error.tsx)
+Source of truth: [`_404.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/_404.tsx) and
+[`_error.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/_error.tsx)
 
 Both files are **root-only** (`src/routes/_404.tsx`, `src/routes/_error.tsx`)
 and render standalone — no layout wraps them. They may only export `default`.

@@ -1,6 +1,6 @@
 # Recipe: mutation + `refresh()`
 
-Source of truth: [`examples/cookbook/src/routes/mutate.tsx`](../../../examples/cookbook/src/routes/mutate.tsx)
+Source of truth: [`examples/cookbook/src/routes/mutate.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/mutate.tsx)
 
 Pattern: call a serverFn, then revalidate the page with `refresh()`. There is no
 cache and no optimistic API in v1 — the server is always the source of truth.

@@ -1,8 +1,8 @@
 # Recipe: shadcn/ui components (Radix included)
 
-Source of truth: [`src/components/ui/`](../../../examples/cookbook/src/components/ui/),
-[`src/shared/cn.ts`](../../../examples/cookbook/src/shared/cn.ts), and usage in
-[`src/routes/dashboard.tsx`](../../../examples/cookbook/src/routes/dashboard.tsx).
+Source of truth: [`src/components/ui/`](https://github.com/moonsjs/cookbook/blob/main/src/components/ui/),
+[`src/shared/cn.ts`](https://github.com/moonsjs/cookbook/blob/main/src/shared/cn.ts), and usage in
+[`src/routes/dashboard.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/dashboard.tsx).
 
 The cookbook now ships the real pattern — copy-in components, Tailwind, `cva`,
 `cn`, and **Radix primitives** for behavior:

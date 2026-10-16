@@ -1,12 +1,12 @@
 # Recipe: server-only secrets & `env()`
 
-Source of truth: [`src/server/store.server.ts`](../../../examples/cookbook/src/server/store.server.ts)
-and [`src/server/notes.server.ts`](../../../examples/cookbook/src/server/notes.server.ts)
+Source of truth: [`src/server/store.server.ts`](https://github.com/moonsjs/cookbook/blob/main/src/server/store.server.ts)
+and [`src/server/notes.server.ts`](https://github.com/moonsjs/cookbook/blob/main/src/server/notes.server.ts)
 
 `*.server.ts` is the only place for secrets, credentials, and `node:*` imports.
 In the client build these files are replaced by RPC stubs — the compiler proves
 it (see the canary check in
-[`examples/cookbook/vite.config.ts`](../../../examples/cookbook/vite.config.ts)).
+[`examples/cookbook/vite.config.ts`](https://github.com/moonsjs/cookbook/blob/main/vite.config.ts)).
 
 ```ts
 // src/server/store.server.ts (never shipped to the client)

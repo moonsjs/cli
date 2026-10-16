@@ -1,6 +1,6 @@
 # Recipe: query string (search params)
 
-Source of truth: [`examples/cookbook/src/routes/search.tsx`](../../../examples/cookbook/src/routes/search.tsx)
+Source of truth: [`examples/cookbook/src/routes/search.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/search.tsx)
 
 The query string is read from `req.url` in the loader (server-side) and from
 `useSearchParams()` in the component (the same values, embedded into the SSR
@@ -30,6 +30,6 @@ Rules:
 - Do not fetch data client-side from query params; put the filter logic in the
   loader (works for both SSR and client-side navigation).
 
-Notes: [`src/shared/search.ts`](../../../examples/cookbook/src/shared/search.ts)
+Notes: [`src/shared/search.ts`](https://github.com/moonsjs/cookbook/blob/main/src/shared/search.ts)
 holds the pure filter helper (pure helpers must live outside `src/routes/` —
 route files can only export `default | loader | meta`).
