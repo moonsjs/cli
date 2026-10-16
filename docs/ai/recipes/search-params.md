@@ -1,6 +1,6 @@
 # Recipe: query string (search params)
 
-Source of truth: [`examples/cookbook/src/routes/search.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/search.tsx)
+Source of truth: [`src/routes/search.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/search.tsx)
 
 The query string is read from `req.url` in the loader (server-side) and from
 `useSearchParams()` in the component (the same values, embedded into the SSR

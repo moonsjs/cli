@@ -6,7 +6,7 @@ and [`src/server/notes.server.ts`](https://github.com/moonsjs/cookbook/blob/main
 `*.server.ts` is the only place for secrets, credentials, and `node:*` imports.
 In the client build these files are replaced by RPC stubs — the compiler proves
 it (see the canary check in
-[`examples/cookbook/vite.config.ts`](https://github.com/moonsjs/cookbook/blob/main/vite.config.ts)).
+[`vite.config.ts`](https://github.com/moonsjs/cookbook/blob/main/vite.config.ts)).
 
 ```ts
 // src/server/store.server.ts (never shipped to the client)

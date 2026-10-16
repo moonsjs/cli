@@ -303,7 +303,7 @@ const res = await server.fetch("/search?q=alp"); // → Response
 
 ## 10. Recipes (canonical, CI-tested patterns)
 
-Every recipe below links to real, compiled code in `examples/cookbook`:
+Every recipe below links to real, compiled code in the cookbook repo (`moonsjs/cookbook`):
 
 | Recipe                                | Pattern                                              |
 | ------------------------------------- | ---------------------------------------------------- |
@@ -315,7 +315,7 @@ Every recipe below links to real, compiled code in `examples/cookbook`:
 | `recipes/server-secrets-env.md`       | `.server.ts` isolation + `env()`                     |
 | `recipes/testing.md`                  | `createTestServer` + unit tests                      |
 
-> Note: recipe code is the source of truth in `examples/cookbook/**`; CI checks
+> Note: recipe code is the source of truth in the `moonsjs/cookbook` repo; CI checks
 > every link in `docs/ai/**` resolves.
 
 ## 11. Coming from Next.js / Remix — do this instead

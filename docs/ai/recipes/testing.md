@@ -1,6 +1,6 @@
 # Recipe: app-level testing
 
-Source of truth: [`examples/cookbook/test/cookbook.test.ts`](https://github.com/moonsjs/cookbook/blob/main/test/cookbook.test.ts)
+Source of truth: [`test/cookbook.test.ts`](https://github.com/moonsjs/cookbook/blob/main/test/cookbook.test.ts)
 
 Two layers:
 

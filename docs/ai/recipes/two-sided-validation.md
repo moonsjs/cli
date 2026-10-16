@@ -1,7 +1,7 @@
 # Recipe: two-sided validation
 
-Source of truth: [`examples/cookbook/src/routes/guard.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/guard.tsx)
-and [`examples/cookbook/src/shared/schemas.ts`](https://github.com/moonsjs/cookbook/blob/main/src/shared/schemas.ts)
+Source of truth: [`src/routes/guard.tsx`](https://github.com/moonsjs/cookbook/blob/main/src/routes/guard.tsx)
+and [`src/shared/schemas.ts`](https://github.com/moonsjs/cookbook/blob/main/src/shared/schemas.ts)
 
 One schema, used by both sides: the client validates for instant feedback; the
 serverFn re-validates because the client can never be trusted.
