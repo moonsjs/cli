@@ -24,13 +24,13 @@
 
     "@babel/types": ["@babel/types@8.0.6", "", { "dependencies": { "@babel/helper-string-parser": "^8.0.6", "@babel/helper-validator-identifier": "^8.0.6" } }, "sha512-c+xgSWboV2pdwXP67BUWDVRHi2BO5Q3KwxyFVs7taVTY+fsK47/L51ZXQoV9rozHJDNHvJ4v4WEsI/IlxV2l2A=="],
 
-    "@moonsjs/core": ["@moonsjs/core@0.1.11", "", { "dependencies": { "devalue": "^6.0.3" } }, "sha512-wyRre55KiHEeygrCMOsdxM9eIgr8IOwTjNnEJ4ZahZ9/AIYUh31VuteB5gy/jatZOsiV+Ths75H4hQlk2TNfXA=="],
+    "@moonsjs/core": ["@moonsjs/core@0.1.12", "", { "dependencies": { "devalue": "^6.0.3" } }, "sha512-sbF7QKWThxR9A3bzmil6AtVu1Rg/vvkvovQPI+s9qRrNsgTdXizzBFVElCCunnQ7Pe1poht1bkSN5hmrnxVdAA=="],
 
     "@moonsjs/react": ["@moonsjs/react@0.1.4", "", { "dependencies": { "@moonsjs/core": "^0.1.0" }, "peerDependencies": { "react": "^19.3.0", "react-dom": "^19.3.0" } }, "sha512-/lv7i5ezTCzEiyYSpV2gkBt9H7/jcGZSnqdKM22biMkeQyxrhcMCDomSmAaizHB0LNqFc82/kVkrdCB049TfrQ=="],
 
     "@moonsjs/server": ["@moonsjs/server@0.1.7", "", { "dependencies": { "@moonsjs/core": "^0.1.0", "@standard-schema/spec": "^1.1.0", "devalue": "^6.0.3" } }, "sha512-nkFTPb3A5/55c4ySdgWaZAMUPLXSVefcH5LP2Y3c6bpz9sbV7Auxe3VOPNt0NQlGMsfx+Oud4B6uPwauO9fEVg=="],
 
-    "@moonsjs/vite": ["@moonsjs/vite@0.1.13", "", { "dependencies": { "@babel/parser": "^8.0.7", "@moonsjs/core": "^0.1.0", "@moonsjs/react": "^0.1.0", "@moonsjs/server": "^0.1.0" }, "peerDependencies": { "vite": "^8.3.4" } }, "sha512-Odd1BSCqr4wuA/CtR9qHHgPZSFrfeUzec1SxWZMk1c4+2Hb9JrMeyD0M71XxxG0Tl0u0PSy160RrCV+s2wJ9Mg=="],
+    "@moonsjs/vite": ["@moonsjs/vite@0.1.16", "", { "dependencies": { "@babel/parser": "^8.0.7", "@moonsjs/core": "^0.1.0", "@moonsjs/react": "^0.1.0", "@moonsjs/server": "^0.1.0" }, "peerDependencies": { "vite": "^8.3.4" } }, "sha512-49UMN/ftFAZezygHdNRZMzCvAjOkAvP3qqkWXWobMsKQKCCBZWgTqyiaLghEvBHOp9ngsPxBpdvXi8IaCrh0SA=="],
 
     "@oxc-project/types": ["@oxc-project/types@0.154.0", "", {}, "sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA=="],
 

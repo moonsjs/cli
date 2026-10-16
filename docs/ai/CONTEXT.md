@@ -288,7 +288,10 @@ moons errors --json  # error catalog: code → trigger + suggestions (see `moons
 ```
 
 MCP (`moons-mcp`) exposes the same: `list_routes`, `get_fn_registry`,
-`run_check`, `search_docs`, plus `explain_error` for `[moons] E_...` codes.
+`run_check`, `search_docs`, `explain_error` (for `[moons] E_...` codes),
+`audit`, `run_typegen`, `scaffold_route` (creates route files following the
+conventions — never overwrites) and `tail_dev_logs` (tails the CLI-managed
+`.moons/dev.log` written by `moons dev`).
 
 For app-level tests, dispatch requests in-process — no ports, no browser:
 
