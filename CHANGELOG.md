@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.7.1 — 2026-10-17
+- fix: `doctor` compares majors, not minors (per-package releases make mixed minors valid)
+
 ## v0.7.0 — 2026-10-17
 - feat: per-package `PUBLISHED_VERSIONS` for the create template (release only changed packages)
 - chore: AI bundle refresh (Range)

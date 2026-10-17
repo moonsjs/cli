@@ -46,9 +46,9 @@ export function readPackageVersion(dir: string): string | null {
   }
 }
 
-function minorOf(version: string): string {
-  const [major, minor] = version.split(".");
-  return `${major ?? version}.${minor ?? "0"}`;
+function majorOf(version: string): string {
+  const [major] = version.split(".");
+  return major ?? version;
 }
 
 /**
@@ -190,16 +190,23 @@ export function checkDeps(root: string): DoctorCheck[] {
         },
   );
 
-  const minors = new Set(versions.map(minorOf));
+  // Rilis per-paket (aturan proses 0.7.0) membuat minor berbeda itu sah
+  // (mis. core 0.6 + vite 0.7). Yang tetap mencurigakan: beda MAJOR.
+  const majors = new Set(versions.map(majorOf));
   checks.push(
-    minors.size <= 1
-      ? { id: "deps.versions", level: "pass", title: "framework versions share one minor" }
+    majors.size <= 1
+      ? {
+          id: "deps.versions",
+          level: "pass",
+          title: "framework versions share one major",
+          detail: versions.join(" · "),
+        }
       : {
           id: "deps.versions",
           level: "warn",
-          title: "mixed framework minor versions",
-          detail: [...minors].join(" · "),
-          hint: "All @moonsjs/* packages should come from the same release wave",
+          title: "mixed framework major versions",
+          detail: [...majors].join(" · "),
+          hint: "Align the @moonsjs/* majors (per-package minors are fine)",
         },
   );
 

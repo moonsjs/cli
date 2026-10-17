@@ -27,7 +27,7 @@ export const PUBLISHED_VERSIONS: Record<string, string> = {
   "@moonsjs/server": "0.6.0",
   "@moonsjs/react": "0.6.0",
   "@moonsjs/vite": "0.7.0",
-  "@moonsjs/cli": "0.7.0",
+  "@moonsjs/cli": "0.7.1",
 };
 
 /** Versi terbit untuk sebuah paket; melempar bila template belum diperbarui. */

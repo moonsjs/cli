@@ -69,10 +69,16 @@ test("checkDeps: sehat → pass semua; duplikat → fail; minor campuran → war
   expect(checkById(dupeChecks, "deps.duplicates").level).toBe("fail");
   expect(checkById(dupeChecks, "deps.duplicates").detail).toContain("@moonsjs/server");
 
-  const mixed = tempDir("doctor-deps-mixed-");
-  installWorkspaceDeps(mixed);
-  writePackage(join(mixed, "node_modules", "@moonsjs", "react"), "0.2.0");
-  expect(checkById(checkDeps(mixed), "deps.versions").level).toBe("warn");
+  // Rilis per-paket: minor berbeda sah → pass (aturan proses 0.7.0).
+  const mixedMinors = tempDir("doctor-deps-mixed-");
+  installWorkspaceDeps(mixedMinors);
+  writePackage(join(mixedMinors, "node_modules", "@moonsjs", "react"), "0.2.0");
+  expect(checkById(checkDeps(mixedMinors), "deps.versions").level).toBe("pass");
+
+  const mixedMajors = tempDir("doctor-deps-major-");
+  installWorkspaceDeps(mixedMajors);
+  writePackage(join(mixedMajors, "node_modules", "@moonsjs", "vite"), "1.0.0");
+  expect(checkById(checkDeps(mixedMajors), "deps.versions").level).toBe("warn");
 
   const missing = tempDir("doctor-deps-missing-");
   expect(checkById(checkDeps(missing), "deps.installed").level).toBe("fail");
