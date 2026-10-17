@@ -31,7 +31,8 @@ export interface DoctorOptions {
 }
 
 const WORKSPACE_PACKAGES = ["core", "server", "react", "vite"] as const;
-const PEER_PACKAGES = ["react", "react-dom", "zod"] as const;
+// K7: `zod` tidak wajib — Standard Schema mengizinkan validator lain.
+const PEER_PACKAGES = ["react", "react-dom"] as const;
 
 export function readPackageVersion(dir: string): string | null {
   const file = join(dir, "package.json");

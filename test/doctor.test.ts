@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { mkdirSync, mkdtempSync, utimesSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, utimesSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
@@ -138,4 +138,11 @@ test("readPackageVersion: JSON rusak → null", () => {
   writeFileSync(join(dir, "package.json"), "{ not json");
   expect(readPackageVersion(dir)).toBeNull();
   expect(readPackageVersion(join(dir, "nope"))).toBeNull();
+});
+
+test("K7: zod tidak wajib (Standard Schema) — deps.peer pass tanpa zod", () => {
+  const dir = tempDir("doctor-deps-nozod-");
+  installWorkspaceDeps(dir);
+  rmSync(join(dir, "node_modules", "zod"), { recursive: true, force: true });
+  expect(checkById(checkDeps(dir), "deps.peer").level).toBe("pass");
 });

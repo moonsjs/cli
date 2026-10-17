@@ -155,10 +155,10 @@ export async function runCreate(cwd: string, name: string | undefined): Promise<
   console.log("");
   console.log("Done! Next steps:");
   console.log(`  cd ${name}`);
-  console.log("  moons dev        # dev server (port 3000)");
-  console.log("  moons check      # verify: typegen -> tsc -> build");
-  console.log("  moons build      # production build (dist/client + dist/server)");
-  console.log("  moons start      # serve the build output");
+  console.log("  bun run dev      # dev server (port 3000)");
+  console.log("  bun run check    # verify: typegen -> tsc -> build");
+  console.log("  bun run build    # production build (dist/client + dist/server)");
+  console.log("  bun run start    # serve the build output");
   console.log("");
   console.log("AGENTS.md + llms.txt written to the project (context for AI agents).");
 }

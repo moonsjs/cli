@@ -27,12 +27,14 @@ Agent context bundled with the CLI: `node_modules/@moonsjs/cli/docs/ai/CONTEXT.m
 - [API Routes](https://docs.devmoon.net/guides/api-routes): Raw HTTP endpoints under src/api, from file mapping and method handlers to an explicit security model.
 - [Middleware](https://docs.devmoon.net/guides/middleware): Directory middleware in the routes and API trees, global middleware in config, and the exact request order.
 - [Forms & Mutations](https://docs.devmoon.net/guides/forms): Submit an HTML form to a server function, validate with one schema, show pending and error states, and refresh loader data.
-- [Deployment](https://docs.devmoon.net/guides/deployment): Build output, running the production server, static hosting, edge behavior from config, and Docker.
+- [Deployment](https://docs.devmoon.net/guides/deployment): Build output, running the production server, static hosting, headers and redirects from config, and Docker.
 - [Behind Cloudflare](https://docs.devmoon.net/guides/behind-cloudflare): Run the Moons server behind the Cloudflare proxy: trusted client IPs, origin lockdown, caching, rate limits, and Turnstile.
 - [Prerender & ISR](https://docs.devmoon.net/guides/prerender-and-isr): Build-time rendering with prerender and paths, incremental revalidation, shared ISR storage, and when to use each mode.
 - [Testing](https://docs.devmoon.net/guides/testing): Test routes, schemas, and API handlers with moons test, then smoke-test the production build.
 - [Migrating from Next.js](https://docs.devmoon.net/guides/migrating-from-nextjs): Map App Router and Pages Router concepts to Moons, port a small posts app step by step, and see what the framework deliberately leaves out.
 - [Migrating from Remix + React Router v7](https://docs.devmoon.net/guides/migrating-from-remix): Move Remix and React Router v7 loaders, actions, and route modules to Moons, port a notes app, and see what the framework deliberately leaves out.
+- [Benchmarks](https://docs.devmoon.net/benchmarks): The measured numbers, what each one covers, the budgets that guard against regressions, and how to reproduce them.
+- [Versioning and Support](https://docs.devmoon.net/versioning-and-support): How Moons versions and deprecates its packages, what 0.x means, the criteria for 1.0, and how to report security issues.
 
 ## API Reference
 - [@moonsjs/core](https://docs.devmoon.net/api/core): The config helper and validated config keys, the error model, routing signals, and request-scoped response helpers.
@@ -49,6 +51,8 @@ Agent context bundled with the CLI: `node_modules/@moonsjs/cli/docs/ai/CONTEXT.m
 
 ## Architecture
 - [Architecture](https://docs.devmoon.net/architecture): Why the server/client boundary is dangerous, the three layers that enforce it, and the limits you still own.
+- [Security and Verification](https://docs.devmoon.net/security-and-verification): The three zero-trust guarantees, their honest current status, and the adversarial corpus you can run yourself.
+- [What Moons Refuses, and Why](https://docs.devmoon.net/philosophy): The features Moons deliberately leaves out, the reason behind each refusal, and the pattern that replaces it.
 
 ## Packages
 
