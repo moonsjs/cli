@@ -146,14 +146,15 @@ test("scaffoldProject: dependencyMode 'published' menulis ulang workspace:* ke ^
     dependencies: Record<string, string>;
     devDependencies: Record<string, string>;
   };
-  expect(pkg.dependencies["@moonsjs/core"]).toBe("^0.1.0");
+  expect(pkg.dependencies["@moonsjs/core"]).toBe(`^${PUBLISHED_FRAMEWORK_VERSION}`);
   expect(pkg.dependencies["react"]).toBe("^19.3.0");
-  expect(pkg.devDependencies["@moonsjs/vite"]).toBe("^0.1.0");
+  expect(pkg.devDependencies["@moonsjs/vite"]).toBe(`^${PUBLISHED_FRAMEWORK_VERSION}`);
   // Satu pintu (decisions/0017): app standalone memakai CLI lokal.
   expect(pkg.scripts["dev"]).toBe("moons dev");
   expect(pkg.scripts["build"]).toBe("moons build");
   expect(pkg.scripts["start"]).toBe("moons start");
   expect(pkg.scripts["check"]).toBe("moons check");
+  expect(pkg.scripts["test"]).toBe("moons test");
 });
 
 test("scaffoldProject: mode default (workspace) mempertahankan workspace:*", () => {

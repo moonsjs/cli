@@ -71,6 +71,7 @@ export function scaffoldProject(options: ScaffoldOptions): ScaffoldResult {
       build: "moons build",
       start: "moons start",
       check: "moons check",
+      test: "moons test",
       tsc: "tsc",
     };
   }

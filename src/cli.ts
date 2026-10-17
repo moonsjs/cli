@@ -10,6 +10,7 @@ import { runErrors } from "./commands/errors";
 import { runFns } from "./commands/fns";
 import { runRoutes } from "./commands/routes";
 import { runStart } from "./commands/start";
+import { runTest } from "./commands/test";
 import { runTypegen } from "./commands/typegen";
 
 const USAGE = [
@@ -25,6 +26,7 @@ const USAGE = [
   "  moons check [--json]  typegen -> tsc --noEmit -> build client+server",
   "  moons errors [--json] machine-readable error catalog",
   "  moons audit [--json]  security audit (RPC, env, cookie, CSP, dist/client)",
+  "  moons test [args…]    run bun test with the Moons server transform preloaded",
 ];
 
 /** Entry CLI (dipisah dari `process` agar bisa ditest). */
@@ -77,6 +79,8 @@ export async function runCli(argv: ReadonlyArray<string>, cwd = process.cwd()): 
         return await runCheck(cwd, parsed.args);
       case "audit":
         return await runAudit(cwd, parsed.args);
+      case "test":
+        return await runTest(cwd, parsed.args);
     }
     return 0;
   } catch (error) {

@@ -1,6 +1,6 @@
 # Moons — Context for AI Agents
 
-Compact, accurate guide for building apps with **Moons** (`@moonsjs/*`, v0.1.14).
+Compact, accurate guide for building apps with **Moons** (`@moonsjs/*`, v0.2.0).
 Everything here is verified against the current implementation. When in doubt, run
 `moons check` — green means the types line up and the client bundle is leak-free.
 
@@ -99,6 +99,7 @@ moons typegen          # regenerate .moons/routes.d.ts + .moons/context.d.ts
 moons routes --json    # route table from scan (no build needed)
 moons fns --json       # serverFn registry (file#export → hash)
 moons check --json     # typegen → tsc --noEmit → build client → build server
+moons test [args…]     # bun test + preload that injects serverFn metadata
 ```
 
 ## 2. File routing
@@ -221,7 +222,7 @@ export default defineConfig({
 ## 6. Navigation, search params, refresh
 
 ```tsx
-import { Link, refresh, useLoaderData, useParams, useSearchParams } from "@moonsjs/react";
+import { Link, navigate, refresh, useLoaderData, useParams, useSearchParams } from "@moonsjs/react";
 
 <Link to="/search" search={{ q: "alpha", page: 2 }}>alpha</Link>
 ```
@@ -229,6 +230,12 @@ import { Link, refresh, useLoaderData, useParams, useSearchParams } from "@moons
 - `Link` renders `<a href>`; left click without modifiers becomes client-side
   navigation (fetch + DOM swap + hydrate). `params` fills dynamic segments,
   `search` appends a query string (`undefined` values are skipped).
+- `navigate(href, { replace? })` from `@moonsjs/react` runs the same
+  navigation from code; `href` is a URL path (a route key requires `Link`),
+  `replace: true` swaps the history entry. No active runtime → document
+  navigation; bare `#fragment`/external URLs go to the browser. Same-document
+  hash changes are ignored by the router (the browser scrolls the anchor);
+  back/forward across real pages still restores the saved scroll.
 - `useSearchParams(): Record<string,string>` — the request's query string; the
   same values are embedded into the SSR payload, so server and client agree.
 - `refresh()` re-runs the current URL through the document-fetch pipeline (data
@@ -245,6 +252,10 @@ import { Link, refresh, useLoaderData, useParams, useSearchParams } from "@moons
   prefetches its target document on hover/focus by default (in-memory TTL ~10s,
   consumed once); opt out with `prefetch={false}`. Prefetch only follows the
   document path — never serverFn/RPC — and failures are ignored.
+- `trailingSlash` (`"never" | "always"`): `Link`/`navigate` build canonical
+  hrefs on SSR and in the browser (the client reads a `moons:trailing-slash`
+  meta tag), so clicks never trigger a 308; a raw non-canonical request still
+  gets a method-preserving 308 (exempt: `/`, `/_moons/**`, dotted asset paths).
 - Loaders read the query string from `req.url`, e.g.
   `new URL(req.url).searchParams.get("q")`.
 
@@ -287,6 +298,7 @@ moons routes --json  # inspect the actual route table
 moons fns --json     # inspect serverFn hashes (must match .moons/fn-registry.json)
 moons errors --json  # error catalog: code → trigger + suggestions (see `moons errors`)
 moons audit --json   # security audit: RPC inventory, env() map, cookie flags, headers/CSP, deploy kit, dist scan
+moons test           # bun test with the serverFn-metadata preload
 ```
 
 MCP (`moons-mcp`) exposes the same: `list_routes`, `get_fn_registry`,
@@ -302,6 +314,15 @@ import { createTestServer } from "@moonsjs/vite/server";
 const server = createTestServer({ routes, config, routesDir, loadRoute });
 const res = await server.fetch("/search?q=alp"); // → Response
 ```
+
+Run these with `moons test`: it preloads the serverFn metadata transform
+(`@moonsjs/vite/testing/preload`), so modules importing `serverFn` load; plain
+`bun test` cannot load them (the preload sets `globalThis.__moonsTestPreload`
+for tests that want to skip under a plain run). Pass a path
+(`moons test ./test/app.test.ts`) to run one file — a bare argument is a name
+filter. `createTestServer` also accepts `apiRoutes` + `loadApi` (and
+`apiMiddlewares` + `loadApiMiddleware`), so `src/api` handlers dispatch through
+the same request handler used in production.
 
 ## 10. Recipes (canonical, CI-tested patterns)
 

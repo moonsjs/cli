@@ -14,6 +14,14 @@ const config: MoonsConfig = {
   context: async () => ({ requestId: "test", url: "" }),
 };
 
+
+// Route modules that call `serverFn` need the transform preloaded by
+// `moons test`. Under a plain `bun test` these assertions skip instead of
+// failing on missing serverFn metadata.
+const preloadActive =
+  (globalThis as { __moonsTestPreload?: boolean }).__moonsTestPreload === true;
+const maybeTest = preloadActive ? test : test.skip;
+
 const server = createTestServer({
   routes,
   config,
@@ -25,7 +33,7 @@ const server = createTestServer({
   },
 });
 
-test("/ renders SSR with loader data", async () => {
+maybeTest("/ renders SSR with loader data", async () => {
   const response = await server.fetch("/");
   expect(response.status).toBe(200);
   const body = await response.text();
@@ -33,7 +41,7 @@ test("/ renders SSR with loader data", async () => {
   expect(body).toContain("2024-01-01");
 });
 
-test("/about tersedia", async () => {
+maybeTest("/about tersedia", async () => {
   const about = createTestServer({
     routes,
     config,

@@ -9,6 +9,7 @@ export const CLI_COMMANDS = [
   "check",
   "errors",
   "audit",
+  "test",
 ] as const;
 
 export type CliCommand = (typeof CLI_COMMANDS)[number];
