@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
+import { MoonsError } from "@moonsjs/core";
 
 /** Root repo (dipakai saat CLI dijalankan dari source di dalam monorepo). */
 /** Root paket cli (repo ini) — dipakai test & templateDir. */
@@ -16,7 +17,34 @@ export const templateDir = existsSync(join(resolve(import.meta.dir, ".."), "temp
   : join(repoRoot, "template");
 
 /** Versi paket framework yang dipublikasikan (dipakai `create` di luar workspace). */
-export const PUBLISHED_FRAMEWORK_VERSION = "0.6.0";
+/**
+ * Versi per-paket untuk template `create` mode published (aturan proses
+ * wave 0.7.0: rilis hanya paket yang berubah). Setiap `@moonsjs/*` yang
+ * ditulis `workspace:*` di template WAJIB punya entri di sini — dijaga test.
+ */
+export const PUBLISHED_VERSIONS: Record<string, string> = {
+  "@moonsjs/core": "0.6.0",
+  "@moonsjs/server": "0.6.0",
+  "@moonsjs/react": "0.6.0",
+  "@moonsjs/vite": "0.7.0",
+  "@moonsjs/cli": "0.7.0",
+};
+
+/** Versi terbit untuk sebuah paket; melempar bila template belum diperbarui. */
+export function publishedVersionFor(packageName: string): string {
+  const version = PUBLISHED_VERSIONS[packageName];
+  if (version === undefined) {
+    throw new MoonsError({
+      code: "E_INTERNAL",
+      message: `no published version registered for \`${packageName}\``,
+      details:
+        "The CLI template rewrites `workspace:*` ranges for standalone apps; " +
+        "every @moonsjs package in the template needs an entry in PUBLISHED_VERSIONS.",
+      suggestions: ["Add the package to PUBLISHED_VERSIONS in src/util.ts"],
+    });
+  }
+  return version;
+}
 
 /**
  * Cari workspace root yang memuat `targetDir` sebagai anggota. Mendukung pola

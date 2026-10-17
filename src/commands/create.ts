@@ -2,7 +2,7 @@ import { MoonsError } from "@moonsjs/core";
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { basename, join, relative, resolve, sep } from "node:path";
 import { renderAgentsMd, renderScaffoldLlmsTxt } from "../scaffold-ai";
-import { PUBLISHED_FRAMEWORK_VERSION, detectWorkspaceRoot, templateDir } from "../util";
+import { detectWorkspaceRoot, publishedVersionFor, templateDir } from "../util";
 
 const EXCLUDED_SEGMENTS = new Set(["node_modules", "dist", ".moons", ".git"]);
 
@@ -59,7 +59,7 @@ export function scaffoldProject(options: ScaffoldOptions): ScaffoldResult {
       }
       for (const [dependency, range] of Object.entries(deps)) {
         if (range === "workspace:*") {
-          deps[dependency] = `^${PUBLISHED_FRAMEWORK_VERSION}`;
+          deps[dependency] = `^${publishedVersionFor(dependency)}`;
         }
       }
     }

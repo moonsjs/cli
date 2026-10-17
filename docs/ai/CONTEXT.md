@@ -389,6 +389,7 @@ Operational facts:
 
 - `GET`/`HEAD /_moons/health` → `{"ok":true}`, handled before context and routes; other methods → `405`.
 - `moons start` serves `dist/` with weak ETags (`304` on `If-None-Match`), gzip for text assets, and a graceful SIGTERM drain.
+- Static files answer `Range: bytes=…` with `206` + `Content-Range` (single range; `416` unsatisfiable; partial is identity, no gzip).
 - Production host: `Bun.serve` on Bun, `node:http` on Node (override `MOONS_SERVER=bun|node`); both share static/ISR/ETag/gzip/trailing-slash/body-limit/header behavior.
 - `requestTimeoutMs` (default 30s) bounds handlers on every transport (dev included) → `504 E_REQUEST_TIMEOUT`; Bun `idleTimeout` is aligned so the framework's 504 wins; `0` disables.
 - Prerendered documents live in `dist/client`; a route with `export const revalidate = <seconds>` is regenerated in the background by `moons start`, written through `isr.storage` when configured.

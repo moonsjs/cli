@@ -4,7 +4,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { scaffoldProject } from "../src/commands/create";
-import { PUBLISHED_FRAMEWORK_VERSION } from "../src/util";
+import { PUBLISHED_VERSIONS } from "../src/util";
 import { detectWorkspaceRoot, matchesWorkspacePattern, templateDir } from "../src/util";
 
 test("matchesWorkspacePattern mendukung dir/*", () => {
@@ -147,9 +147,9 @@ test("scaffoldProject: dependencyMode 'published' menulis ulang workspace:* ke v
     dependencies: Record<string, string>;
     devDependencies: Record<string, string>;
   };
-  expect(pkg.dependencies["@moonsjs/core"]).toBe(`^${PUBLISHED_FRAMEWORK_VERSION}`);
+  expect(pkg.dependencies["@moonsjs/core"]).toBe(`^${PUBLISHED_VERSIONS["@moonsjs/core"]}`);
   expect(pkg.dependencies["react"]).toBe("^19.3.0");
-  expect(pkg.devDependencies["@moonsjs/vite"]).toBe(`^${PUBLISHED_FRAMEWORK_VERSION}`);
+  expect(pkg.devDependencies["@moonsjs/vite"]).toBe(`^${PUBLISHED_VERSIONS["@moonsjs/vite"]}`);
   // Satu pintu (decisions/0017): app standalone memakai CLI lokal.
   expect(pkg.scripts["dev"]).toBe("moons dev");
   expect(pkg.scripts["build"]).toBe("moons build");
@@ -172,4 +172,21 @@ test("scaffoldProject: mode default (workspace) mempertahankan workspace:*", () 
     dependencies: Record<string, string>;
   };
   expect(pkg.dependencies["@moonsjs/core"]).toBe("workspace:*");
+});
+
+test("template: setiap @moonsjs/* punya entri PUBLISHED_VERSIONS", () => {
+  const templatePackage = JSON.parse(
+    readFileSync(join(templateDir, "package.json"), "utf8"),
+  ) as {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+  };
+  const names = [
+    ...Object.keys(templatePackage.dependencies ?? {}),
+    ...Object.keys(templatePackage.devDependencies ?? {}),
+  ].filter((name) => name.startsWith("@moonsjs/"));
+  expect(names.length).toBeGreaterThan(0);
+  for (const name of names) {
+    expect(PUBLISHED_VERSIONS[name], name).toBeDefined();
+  }
 });
