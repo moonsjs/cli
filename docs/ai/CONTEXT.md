@@ -375,6 +375,7 @@ Validated `moons.config.ts` keys:
 | `security.bodyLimitBytes` | `number` (default 1 MB) — RPC request bodies |
 | `security.serverOnlyPackages` | `string[]` — extra packages blocked from client modules |
 | `security.trustProxy` | `boolean` — trust `x-forwarded-*` (only behind a proxy you control) |
+| `security.clientIpHeader` | `string` (default `x-forwarded-for`) — trusted client-IP header when trustProxy is on; use `cf-connecting-ip` behind Cloudflare; requires `trustProxy: true` |
 | `headers` | `Record<string, string>` — extra response headers |
 | `redirects` | `{ from, to, status? }[]` — status 301/302/307/308 (default 301) |
 | `sitemap` | `{ site, exclude? }` — generated at build for prerendered paths |
@@ -392,3 +393,4 @@ Operational facts:
 - `requestTimeoutMs` (default 30s) bounds handlers on every transport (dev included) → `504 E_REQUEST_TIMEOUT`; Bun `idleTimeout` is aligned so the framework's 504 wins; `0` disables.
 - Prerendered documents live in `dist/client`; a route with `export const revalidate = <seconds>` is regenerated in the background by `moons start`, written through `isr.storage` when configured.
 - Rate limiting and session cookies are app-level: `createRateLimiter({ limit, windowMs })` + `getClientIp(req)`; `signCookie`/`verifyCookie` with a secret from `env()`.
+- Behind Cloudflare: `trustProxy: true` + `clientIpHeader: "cf-connecting-ip"` (XFF is append-based and spoofable); lock the origin with Authenticated Origin Pulls/Tunnel; edge rate limits + Turnstile are documented in `guides/behind-cloudflare`.

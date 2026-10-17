@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.6.0 — 2026-10-17
+- chore: AI bundle refresh (clientIpHeader) + ranges ^0.6.0
+
 ## v0.5.0 — 2026-10-17
 - chore: AI bundle refresh (`requestTimeoutMs`) + ranges ^0.5.0
 

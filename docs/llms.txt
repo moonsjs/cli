@@ -28,6 +28,7 @@ Agent context bundled with the CLI: `node_modules/@moonsjs/cli/docs/ai/CONTEXT.m
 - [Middleware](https://docs.devmoon.net/guides/middleware): Directory middleware in the routes and API trees, global middleware in config, and the exact request order.
 - [Forms & Mutations](https://docs.devmoon.net/guides/forms): Submit an HTML form to a server function, validate with one schema, show pending and error states, and refresh loader data.
 - [Deployment](https://docs.devmoon.net/guides/deployment): Build output, running the production server, static hosting, edge behavior from config, and Docker.
+- [Behind Cloudflare](https://docs.devmoon.net/guides/behind-cloudflare): Run the Moons server behind the Cloudflare proxy: trusted client IPs, origin lockdown, caching, rate limits, and Turnstile.
 - [Prerender & ISR](https://docs.devmoon.net/guides/prerender-and-isr): Build-time rendering with prerender and paths, incremental revalidation, shared ISR storage, and when to use each mode.
 - [Testing](https://docs.devmoon.net/guides/testing): Test routes, schemas, and API handlers with moons test, then smoke-test the production build.
 - [Migrating from Next.js](https://docs.devmoon.net/guides/migrating-from-nextjs): Map App Router and Pages Router concepts to Moons, port a small posts app step by step, and see what the framework deliberately leaves out.
