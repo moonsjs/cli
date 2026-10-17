@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { scaffoldProject } from "../src/commands/create";
+import { PUBLISHED_FRAMEWORK_VERSION } from "../src/util";
 import { detectWorkspaceRoot, matchesWorkspacePattern, templateDir } from "../src/util";
 
 test("matchesWorkspacePattern mendukung dir/*", () => {
@@ -121,7 +122,7 @@ test("scaffoldProject: template di dalam path ber-`node_modules` (layout bunx) t
   expect(existsSync(join(target, "node_modules"))).toBe(false);
 });
 
-test("scaffoldProject: dependencyMode 'published' menulis ulang workspace:* ke ^0.1.0 + script satu pintu", () => {
+test("scaffoldProject: dependencyMode 'published' menulis ulang workspace:* ke versi publish + script satu pintu", () => {
   const template = mkdtempSync(join(tmpdir(), "moons-template-pub-"));
   writeFileSync(
     join(template, "package.json"),
