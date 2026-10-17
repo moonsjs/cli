@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.5.0 — 2026-10-17
+- chore: AI bundle refresh (`requestTimeoutMs`) + ranges ^0.5.0
+
 All notable changes to this package. Entries mirror commit subjects;
 releases are tagged `vX.Y.Z` in the package repository.
 

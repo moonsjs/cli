@@ -380,6 +380,7 @@ Validated `moons.config.ts` keys:
 | `sitemap` | `{ site, exclude? }` — generated at build for prerendered paths |
 | `robots` | `{ sitemap?: boolean, disallow?: string[] }` |
 | `trailingSlash` | `"never" \| "always"` — 308 redirect policy |
+| `requestTimeoutMs` | `number` (default 30000) — handler budget; `504 E_REQUEST_TIMEOUT`; `0` disables |
 | `logging` | `{ accessLog?: boolean, json?: boolean, redact?: string[] }` |
 | `isr` | `{ storage?: PrerenderStorage }` — shared store for revalidated pages |
 
@@ -388,5 +389,6 @@ Operational facts:
 - `GET`/`HEAD /_moons/health` → `{"ok":true}`, handled before context and routes; other methods → `405`.
 - `moons start` serves `dist/` with weak ETags (`304` on `If-None-Match`), gzip for text assets, and a graceful SIGTERM drain.
 - Production host: `Bun.serve` on Bun, `node:http` on Node (override `MOONS_SERVER=bun|node`); both share static/ISR/ETag/gzip/trailing-slash/body-limit/header behavior.
+- `requestTimeoutMs` (default 30s) bounds handlers on every transport (dev included) → `504 E_REQUEST_TIMEOUT`; Bun `idleTimeout` is aligned so the framework's 504 wins; `0` disables.
 - Prerendered documents live in `dist/client`; a route with `export const revalidate = <seconds>` is regenerated in the background by `moons start`, written through `isr.storage` when configured.
 - Rate limiting and session cookies are app-level: `createRateLimiter({ limit, windowMs })` + `getClientIp(req)`; `signCookie`/`verifyCookie` with a secret from `env()`.
