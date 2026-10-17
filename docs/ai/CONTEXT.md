@@ -298,6 +298,7 @@ moons routes --json  # inspect the actual route table
 moons fns --json     # inspect serverFn hashes (must match .moons/fn-registry.json)
 moons errors --json  # error catalog: code → trigger + suggestions (see `moons errors`)
 moons audit --json   # security audit: RPC inventory, env() map, cookie flags, headers/CSP, deploy kit, dist scan
+moons doctor --json  # diagnose: config, deps/duplicate framework copies, typegen freshness, port
 moons test           # bun test with the serverFn-metadata preload
 ```
 

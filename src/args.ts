@@ -9,6 +9,7 @@ export const CLI_COMMANDS = [
   "check",
   "errors",
   "audit",
+  "doctor",
   "test",
 ] as const;
 

@@ -5,6 +5,7 @@ import { runAudit } from "./commands/audit";
 import { runBuild } from "./commands/build";
 import { runCheck } from "./commands/check";
 import { runCreate } from "./commands/create";
+import { runDoctor } from "./commands/doctor";
 import { runDev } from "./commands/dev";
 import { runErrors } from "./commands/errors";
 import { runFns } from "./commands/fns";
@@ -26,6 +27,7 @@ const USAGE = [
   "  moons check [--json]  typegen -> tsc --noEmit -> build client+server",
   "  moons errors [--json] machine-readable error catalog",
   "  moons audit [--json]  security audit (RPC, env, cookie, CSP, dist/client)",
+  "  moons doctor [--json] diagnose project, deps, typegen, port (machine-readable)",
   "  moons test [args…]    run bun test with the Moons server transform preloaded",
 ];
 
@@ -79,6 +81,8 @@ export async function runCli(argv: ReadonlyArray<string>, cwd = process.cwd()): 
         return await runCheck(cwd, parsed.args);
       case "audit":
         return await runAudit(cwd, parsed.args);
+      case "doctor":
+        return await runDoctor(cwd, parsed.args);
       case "test":
         return await runTest(cwd, parsed.args);
     }

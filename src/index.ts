@@ -11,6 +11,8 @@ export { collectFns, formatFns } from "./commands/fns";
 export type { FnJsonEntry, FnsJson } from "./commands/fns";
 export { executeCheck, resolveTsBin } from "./commands/check";
 export { executeAudit } from "./commands/audit";
+export { executeDoctor } from "./commands/doctor";
+export type { DoctorCheck, DoctorJson, DoctorOptions } from "./commands/doctor";
 export type { AuditCheck, AuditJson, AuditOptions } from "./commands/audit";
 export { runTypegen } from "./commands/typegen";
 export type { CheckJson, CheckStep } from "./commands/check";

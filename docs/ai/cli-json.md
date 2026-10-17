@@ -111,6 +111,12 @@ Shape: `{ ok, counts: { pass, warn, fail }, checks: [{ id, level, title, detail?
 
 Check ids: `rpc-inventory`, `env-access`, `cookie-flags`, `headers-csp`, `deploy-kit`, `dist-scan`. Exit code `1` when any check fails (`--strict` also fails on warnings); stdout stays valid JSON and stderr stays silent.
 
+## `moons doctor --json`
+
+Shape: `{ moonsVersion, ok, counts: { pass, warn, fail }, checks: [{ id, level, title, detail?, hint? }] }`.
+
+Check ids: `runtime.bun`, `runtime.node`, `project.config`, `project.canary`, `deps.installed`, `deps.peer`, `deps.duplicates`, `deps.versions`, `typegen.fresh` (or `typegen.files` when missing), `port.availability`. Exit code `1` when any check is `fail`; `--strict` also fails on `warn`. `deps.duplicates` reports every resolvable copy path — two copies of a framework package mean two module instances in one process.
+
 ## Agent loop
 
 ```bash
