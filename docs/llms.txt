@@ -1,62 +1,53 @@
-# Moons (@moonsjs)
+# Moons
 
-> Moons is a full-stack TypeScript web framework (file routing, SSR, React
-> hydration) whose one guarantee is that server code can never leak into the
-> client bundle. `*.server.ts` files are replaced by RPC stubs in the client
-> build; smuggling their content into client code fails the build.
+> Moons is a full-stack TypeScript framework (file routing, SSR, React hydration)
+> whose single guarantee is zero-trust: `*.server.ts` modules become typed RPC
+> stubs, and leaking server code fails the build.
 
-## Online docs
+Site: https://docs.devmoon.net
+Agent context bundled with the CLI: `node_modules/@moonsjs/cli/docs/ai/CONTEXT.md`
+(also used by `moons-mcp` `search_docs`).
 
-- Site: https://docs.devmoon.net
-- Raw markdown for agents: https://docs.devmoon.net/raw/ai/CONTEXT.md
-- Bundles: https://docs.devmoon.net/llms.txt · https://docs.devmoon.net/llms-full.txt
-- Bahasa Indonesia: https://docs.devmoon.net/id/
+## Get Started
+- [Installation](https://docs.devmoon.net/getting-started/installation): Create a Moons app with the CLI, understand what the scaffold contains, and verify it with a green check run.
+- [Your First App](https://docs.devmoon.net/getting-started/first-app): Add a route, link pages together, load data on the server, and call your first server function.
 
-## Start here
-
-- [Quickstart](site/start/quickstart.md): create → dev → build → deploy.
-- [Project structure](site/start/project-structure.md)
-- [Zero-trust model](site/concepts/zero-trust.md): the guarantee and how it is enforced.
-
-## Core concepts
-
-- [Routing](site/concepts/routing.md) · [Loaders](site/concepts/loaders.md) ·
-  [serverFn](site/concepts/server-fn.md) ·
-  [Context & env](site/concepts/context-env.md) ·
-  [Navigation & URL params](site/concepts/navigation.md) ·
-  [Meta & SEO](site/concepts/meta.md) ·
-  [Errors, redirect & 404](site/concepts/errors.md)
+## Core Concepts
+- [Zero-Trust Model](https://docs.devmoon.net/core-concepts/zero-trust): What the zero-trust guarantee covers, what stays public, and what remains your responsibility.
+- [Routing](https://docs.devmoon.net/core-concepts/routing): File conventions, dynamic params, nested layouts, navigation signals, and error boundaries.
+- [serverFn](https://docs.devmoon.net/core-concepts/server-fn): Declare server-only functions with typed schemas, call them from loaders or the browser, and revalidate with refresh().
+- [Loaders](https://docs.devmoon.net/core-concepts/loaders): How loader exports run, the LoaderArgs contract, layout loader data, devalue serialization, and the public-data rule.
+- [Context & Environment](https://docs.devmoon.net/core-concepts/context-and-environment): Create per-request context in moons.config.ts, type it with typegen, and keep secrets in env() while public values use VITE_*.
+- [Navigation & Search Params](https://docs.devmoon.net/core-concepts/navigation): Client-side navigation with Link, prefetching, pending UI, search-param parity with loaders, and refresh() after mutations.
+- [Error Handling](https://docs.devmoon.net/core-concepts/error-handling): Custom 404 and error boundaries, redirect and notFound signals, and the [moons] error format with its machine-readable catalog.
 
 ## Guides
+- [Authentication](https://docs.devmoon.net/guides/authentication): A session pattern built on context, signed cookies, loader and serverFn guards, and rate limiting.
+- [Working with Databases](https://docs.devmoon.net/guides/databases): Keep database clients on the server, query them through server functions, and run migrations with plain Bun scripts.
+- [API Routes](https://docs.devmoon.net/guides/api-routes): Raw HTTP endpoints under src/api, from file mapping and method handlers to an explicit security model.
+- [Middleware](https://docs.devmoon.net/guides/middleware): Directory middleware in the routes and API trees, global middleware in config, and the exact request order.
+- [Forms & Mutations](https://docs.devmoon.net/guides/forms): Submit an HTML form to a server function, validate with one schema, show pending and error states, and refresh loader data.
+- [Deployment](https://docs.devmoon.net/guides/deployment): Build output, running the production server, static hosting, edge behavior from config, and Docker.
+- [Prerender & ISR](https://docs.devmoon.net/guides/prerender-and-isr): Build-time rendering with prerender and paths, incremental revalidation, shared ISR storage, and when to use each mode.
+- [Testing](https://docs.devmoon.net/guides/testing): Test routes, schemas, and API handlers with bun test, then smoke-test the production build.
 
-- [Two-sided validation](site/guides/two-sided-validation.md) ·
-  [Auth & CSRF](site/guides/auth-csrf.md) ·
-  [Rate limiting](site/guides/rate-limit.md) ·
-  [API routes](site/guides/api-routes.md) ·
-  [Prerendering & ISR](site/guides/prerender-isr.md) ·
-  [File uploads](site/guides/uploads.md) ·
-  [Caching & HTTP headers](site/guides/caching-headers.md) ·
-  [Testing](site/guides/testing.md) ·
-  [Plugins & lifecycle](site/guides/plugins.md) ·
-  [Build & deploy](site/guides/deploy.md)
+## API Reference
+- [@moonsjs/core](https://docs.devmoon.net/api/core): The config helper and validated config keys, the error model, routing signals, and request-scoped response helpers.
+- [@moonsjs/server](https://docs.devmoon.net/api/server): serverFn, environment access, signed cookies, rate limiting, validation, and request-scoped helpers for server code.
+- [@moonsjs/react](https://docs.devmoon.net/api/react): Link, the data and navigation hooks, routing signals, and the client hydration entry for React route files.
+- [@moonsjs/vite](https://docs.devmoon.net/api/vite): The Vite plugin that scans routes, generates types, enforces the server/client boundary, and verifies the client bundle.
+- [CLI](https://docs.devmoon.net/api/cli): The moons command line for scaffolding, the dev/build/start loop, verification with check, and JSON introspection with routes, fns, errors, and audit.
+- [@moonsjs/mcp](https://docs.devmoon.net/api/mcp): A stdio MCP server that exposes routing, verification, audit, scaffolding, and documentation tools to MCP clients.
 
-## For AI agents
+## Recipes
+- [Notes App](https://docs.devmoon.net/recipes/notes-app): Build a small notes app with a shared schema, a server-only store, a loader, and a mutation that refreshes the list.
+- [Protected Route](https://docs.devmoon.net/recipes/protected-route): Read a signed session cookie in context, guard a page loader, and issue or clear the session with server functions.
+- [Form Submission + Revalidation](https://docs.devmoon.net/recipes/forms-revalidation): Validate a form on both sides, submit it to a server function, refresh the loader, and keep a no-JavaScript fallback working.
 
-- [AI context pack](ai/CONTEXT.md): compact guide — routing, loaders, serverFn, ctx/env, navigation, security rules, verified patterns.
-- [CLI JSON contract](ai/cli-json.md): stable `moons routes|fns|check --json` schemas for machine consumption.
-- [Recipes](ai/recipes/search-params.md): query params, mutations + `refresh()`, two-sided validation, dynamic routes, custom 404/error, secrets/env, testing.
+## Architecture
+- [Architecture](https://docs.devmoon.net/architecture): Why the server/client boundary is dangerous, the three layers that enforce it, and the limits you still own.
 
-## Examples
+## Packages
 
-- [Cookbook](https://github.com/moonsjs/cookbook): canonical patterns, compiled and CI-tested.
-
-## Reference
-
-- [API reference](api/README.md): per-package docs (core, server, react, vite, cli, mcp).
-- [Architecture](manifest.md): why the server/client boundary is dangerous and how Moons enforces it.
-
-## Repositories
-
-Packages are developed in the open under [`moonsjs`](https://github.com/moonsjs):
-`core` · `server` · `react` · `vite` · `cli` · `mcp`, plus `docs` and `cookbook`.
-Issues and pull requests are welcome in each repository.
+`@moonsjs/core` · `@moonsjs/server` · `@moonsjs/react` · `@moonsjs/vite` ·
+`@moonsjs/cli` · `@moonsjs/mcp` — developed in the open at github.com/moonsjs.

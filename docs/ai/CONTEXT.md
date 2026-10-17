@@ -1,8 +1,8 @@
 # Moons — Context for AI Agents
 
-Compact, accurate guide for building apps with **Moons** (`@moonsjs/*`, v0.1.0).
-Everything here is verified by the repository's CI. When in doubt, run
-`moons check` — that is the definition of done.
+Compact, accurate guide for building apps with **Moons** (`@moonsjs/*`, v0.1.14).
+Everything here is verified against the current implementation. When in doubt, run
+`moons check` — green means the types line up and the client bundle is leak-free.
 
 ## 0. What Moons is (and the one guarantee)
 
@@ -250,9 +250,10 @@ import { Link, refresh, useLoaderData, useParams, useSearchParams } from "@moons
 
 ## 7. Errors, 404
 
-- Route files are the client entry for error handling: a loader that throws
-  renders `_error.tsx` (status 500); unknown paths render `_404.tsx` (status
-  404). Both are root-only and render standalone (no layout).
+- A loader that throws renders the nearest `_error.tsx` (status 500); unknown
+  paths render the root `_404.tsx` (status 404). `_404` is root-only; `_error`
+  may live in any directory (the closest boundary wins). Both render standalone
+  (no layout).
 - In development, `useRouteError()` returns the real error object; in
   production, no error detail is ever serialized into the payload.
 - Runtime/compile errors print in the format:
@@ -278,13 +279,14 @@ import { Link, refresh, useLoaderData, useParams, useSearchParams } from "@moons
 5. When a build says a canary leaked (`leakTest.canary`), fix the leak — never
    remove the canary.
 
-## 9. Verification (definition of done)
+## 9. Verification
 
 ```bash
 moons check          # typegen + tsc + build client/server — must be green
 moons routes --json  # inspect the actual route table
 moons fns --json     # inspect serverFn hashes (must match .moons/fn-registry.json)
 moons errors --json  # error catalog: code → trigger + suggestions (see `moons errors`)
+moons audit --json   # security audit: RPC inventory, env() map, cookie flags, headers/CSP, deploy kit, dist scan
 ```
 
 MCP (`moons-mcp`) exposes the same: `list_routes`, `get_fn_registry`,
@@ -329,10 +331,39 @@ Every recipe below links to real, compiled code in the cookbook repo (`moonsjs/c
 | React Router `useSearchParams`         | `useSearchParams()` (works during SSR too)          |
 | SWR/React Query mutation + invalidate  | `await serverFn(...)` then `refresh()`              |
 | `useEffect`-based data fetching        | loaders run on the server; no client fetching       |
-| form actions / optimistic UI           | not in scope (v1): call the serverFn, then `refresh()` |
+| form actions / optimistic UI            | call the serverFn after client-side validation, then `refresh()` |
 
 ## 12. Reference
 
-- `docs/ai/cli-json.md` — stable JSON schemas for `routes`, `fns`, `check`.
-- `docs/api/` — per-package API reference (m1–m5).
-- `docs/manifest.md` — architecture and the three zero-trust layers.
+- `docs/ai/cli-json.md` — stable JSON schemas for `routes`, `fns`, `check`, `errors`, `audit`.
+- https://docs.devmoon.net/api/core · `/api/server` · `/api/react` · `/api/vite` · `/api/cli` · `/api/mcp` — per-package API reference.
+- https://docs.devmoon.net/architecture — the three zero-trust layers and the honest limits.
+- https://docs.devmoon.net/getting-started/installation — the full walkthrough.
+
+## 13. Config, deploy & operations
+
+Validated `moons.config.ts` keys:
+
+| Key | Shape |
+| --- | --- |
+| `routesDir` | `string` (default `"src/routes"`) |
+| `context` | `(req) => ctx` — runs once per request, before middleware |
+| `middleware` | `({ req, ctx, next }) => Promise<Response>`[] — call `next()` exactly once |
+| `security.originWhitelist` | `string[]` — extra origins allowed to call RPC |
+| `security.bodyLimitBytes` | `number` (default 1 MB) — RPC request bodies |
+| `security.serverOnlyPackages` | `string[]` — extra packages blocked from client modules |
+| `security.trustProxy` | `boolean` — trust `x-forwarded-*` (only behind a proxy you control) |
+| `headers` | `Record<string, string>` — extra response headers |
+| `redirects` | `{ from, to, status? }[]` — status 301/302/307/308 (default 301) |
+| `sitemap` | `{ site, exclude? }` — generated at build for prerendered paths |
+| `robots` | `{ sitemap?: boolean, disallow?: string[] }` |
+| `trailingSlash` | `"never" \| "always"` — 308 redirect policy |
+| `logging` | `{ accessLog?: boolean, json?: boolean, redact?: string[] }` |
+| `isr` | `{ storage?: PrerenderStorage }` — shared store for revalidated pages |
+
+Operational facts:
+
+- `GET`/`HEAD /_moons/health` → `{"ok":true}`, handled before context and routes; other methods → `405`.
+- `moons start` serves `dist/` with weak ETags (`304` on `If-None-Match`), gzip for text assets, and a graceful SIGTERM drain.
+- Prerendered documents live in `dist/client`; a route with `export const revalidate = <seconds>` is regenerated in the background by `moons start`, written through `isr.storage` when configured.
+- Rate limiting and session cookies are app-level: `createRateLimiter({ limit, windowMs })` + `getClientIp(req)`; `signCookie`/`verifyCookie` with a secret from `env()`.

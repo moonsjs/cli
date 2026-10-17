@@ -25,7 +25,8 @@ need (e.g. navigable pages only).
       "key": "users/[id]",               // route key: file path w/o extension
       "kind": "page",                    // "page" | "layout" | "error" | "404"
       "params": ["id"],                  // dynamic segment names
-      "layouts": ["_layout"]             // page only: layout keys root → leaf
+      "layouts": ["_layout"],            // page only: layout keys root → leaf
+      "prerender": true                  // present and true when the page opts into prerendering
     }
   ]
 }
@@ -60,7 +61,7 @@ Scans every `*.server.{ts,tsx}` (excluding `node_modules`, `dist`, `.moons`,
 ## `moons check --json`
 
 Runs, in order: `typegen` → `tsc --noEmit` (TypeScript from the app's
-`node_modules`) → `build client` → `build server`.
+`node_modules`) → `build client` → `build server` → `prerender`.
 
 ```jsonc
 {
@@ -69,7 +70,8 @@ Runs, in order: `typegen` → `tsc --noEmit` (TypeScript from the app's
     { "name": "typegen", "ok": true, "durationMs": 97 },
     { "name": "tsc --noEmit", "ok": true, "durationMs": 780 },
     { "name": "build client", "ok": true, "durationMs": 530 },
-    { "name": "build server", "ok": true, "durationMs": 520 }
+    { "name": "build server", "ok": true, "durationMs": 520 },
+    { "name": "prerender", "ok": true, "durationMs": 340 }
   ]
 }
 ```
@@ -90,7 +92,7 @@ Machine-readable error catalog — the structured source is
 
 ```jsonc
 {
-  "moonsVersion": "0.1.3",
+  "moonsVersion": "0.1.14",
   "count": 13,
   "errors": [
     {
