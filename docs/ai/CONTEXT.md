@@ -387,5 +387,6 @@ Operational facts:
 
 - `GET`/`HEAD /_moons/health` → `{"ok":true}`, handled before context and routes; other methods → `405`.
 - `moons start` serves `dist/` with weak ETags (`304` on `If-None-Match`), gzip for text assets, and a graceful SIGTERM drain.
+- Production host: `Bun.serve` on Bun, `node:http` on Node (override `MOONS_SERVER=bun|node`); both share static/ISR/ETag/gzip/trailing-slash/body-limit/header behavior.
 - Prerendered documents live in `dist/client`; a route with `export const revalidate = <seconds>` is regenerated in the background by `moons start`, written through `isr.storage` when configured.
 - Rate limiting and session cookies are app-level: `createRateLimiter({ limit, windowMs })` + `getClientIp(req)`; `signCookie`/`verifyCookie` with a secret from `env()`.

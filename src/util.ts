@@ -16,7 +16,7 @@ export const templateDir = existsSync(join(resolve(import.meta.dir, ".."), "temp
   : join(repoRoot, "template");
 
 /** Versi paket framework yang dipublikasikan (dipakai `create` di luar workspace). */
-export const PUBLISHED_FRAMEWORK_VERSION = "0.3.0";
+export const PUBLISHED_FRAMEWORK_VERSION = "0.4.0";
 
 /**
  * Cari workspace root yang memuat `targetDir` sebagai anggota. Mendukung pola
